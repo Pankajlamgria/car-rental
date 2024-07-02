@@ -1,0 +1,98 @@
+body{
+    background-color: rgb(12, 12, 12);
+}
+#HomeImgCover{
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 58vh;
+    >img{
+        width: 100%;
+        height: 100%;
+        transform: scaleY(1.5);     
+    }
+}
+#TagLine{
+    position: absolute;
+    z-index: 2;
+    color: white;
+    top:22%;
+    left: 5%;
+}
+#TagLine > span{
+    font-size: 32px;
+    font-family:serif,Verdana, Geneva, Tahoma, sans-serif
+}
+#TagLine h1{
+    font-size: 40px;
+    margin-bottom: -10px;
+}
+.highlight{
+    color: rgb(255, 0, 0);
+    font-family:"Oswald Bold", bold, sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+}
+#SearchArea{
+    position: absolute;
+    background-color:rgb(255, 255, 255);
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    display: flex;
+    left: 15%;
+    top:34rem;
+    z-index: 2;
+    border-radius: 12px;
+    padding: 0px;
+    height: 90px;
+    box-shadow: 1px 1px 8px rgb(220, 220, 220);
+    p{
+        font-size:18px;
+        font-family:'Courier New', Courier, monospace;
+        font-weight: 700;
+        margin: 2px;
+        color:black
+    }
+    input{
+        border:  1px solid rgb(200, 200, 200);
+        border-radius: 10px;
+        height: 28px;
+        width: 90%;
+        font-size: 17px;
+        padding-left: 9px;
+        box-shadow: 2px 2px 20px rgb(211, 211, 211);
+    }
+
+}
+#Gps button{
+    background-color: black;
+    color: white;
+    height: 38px;
+    width: 150px;
+    font-size: 15px;
+    border:2px solid rgb(255, 0, 0);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 2px 2px 12px rgb(255, 2, 2);
+}
+#SearchButtonCover button{
+    background-color: black;
+    color: white;
+    height: 38px;
+    width: 150px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 2px 2px 12px rgb(56, 56, 56);
+    transition: .2s;
+}
+#SearchButtonCover button:hover{
+    transform: scale(1.1);
+}

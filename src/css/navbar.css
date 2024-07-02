@@ -1,0 +1,97 @@
+#Navbar{
+    display:flex;
+    align-items: center;
+    position: sticky;
+    color: white;
+    z-index: 10;
+    width: 100%;
+    justify-content: space-around;
+    ul{
+        width: 50%;
+        list-style-type: none;
+        display: flex;
+        padding: 0px 18rem 0px 0rem;
+        text-decoration: none;
+        justify-content: space-around;
+        font-size: 22px;
+        /* background-color: green; */
+        li{
+            cursor: pointer;
+        }
+        li:hover{
+            text-shadow: 3px 3px 12px rgba(191, 18, 18, 0.853);
+            transition: .3s;
+            color: rgb(244, 47, 47);
+            scale: 1.3;
+            /* animation: vibrate .2s infinite; */
+        }
+    }
+
+}
+#Navbar >div{
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#RegButtonCover{
+    width: 30%;
+    display: flex;
+    justify-content: right;
+    button{
+        width: 90px;
+        height: 38px;
+        font-size: larger;
+        /* margin-right: .5rem; */
+        cursor: pointer;
+    }
+}
+#RegButtonCover button:nth-child(1){
+    background-color: transparent;
+    transition: .2s;
+    color: rgb(255, 0, 0);
+    border: none;
+    font-size: 22px;
+}
+#RegButtonCover button:nth-child(2){
+    background-color: red;
+    color: white;
+    border-radius: 20px 0px 0px 20px;
+    border-color: red; 
+    width: 150px;   
+    text-align: left;
+    padding-left:1rem;
+}
+#RegButtonCover button:nth-child(1):hover{
+    transform: scale(1.2);
+}
+#RegButtonCover button:nth-child(2):hover{
+    box-shadow: 2px 2px 15px red;
+}
+#LogoCover{
+    width: 60px;
+    height: 60px;
+    border-radius: 20%;
+    margin-top:4px;
+    overflow: hidden;
+}
+#LogoCover img{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+@keyframes vibrate {
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(-5deg);
+    }
+    50%{
+        transform: rotate(5deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
