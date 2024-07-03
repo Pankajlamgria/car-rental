@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import "../css/navbar.css";
 import logo from "../media/logo.jpg";
 import { useNavigate } from 'react-router-dom';
+import { CiUser } from "react-icons/ci";
+import rentalcontext from '../context/Rentalcontext';
 const Navbar = () => {
+  const contextContent=useContext(rentalcontext);
   const navigate=useNavigate();
   const handleHomeClick=()=>{
     navigate("/");
@@ -12,6 +15,17 @@ const Navbar = () => {
   }
   const handleSignin=()=>{
     navigate("/Signin");
+  }
+  const handleLogout=async()=>{
+    try{
+      const res=await contextContent.account.deleteSession("current");
+      console.log(res);
+      contextContent.setNewUser(true);
+      navigate('/login');
+    }
+    catch(e){
+      alert(e);
+    }
   }
 
   return (
@@ -29,7 +43,13 @@ const Navbar = () => {
             <li>Services</li>
             <li>Contact</li>
         </ul>
-        <div id="RegButtonCover">
+        <div id="ProfileButtonCover" style={{display:(contextContent.newUser)?"none":"flex"}}>
+          <div id="UserBtnCover">
+              <button onClick={handleLogout}><CiUser/></button>
+          </div>
+          <button>Connect</button>
+        </div>
+        <div id="RegButtonCover" style={{display:(!contextContent.newUser)?"none":"flex"}}>
             <button onClick={handleLogin}>Login</button>
             <button onClick={handleSignin}>Signin</button>
         </div>

@@ -34,7 +34,7 @@
     align-items: center;
     justify-content: center;
 }
-#RegButtonCover{
+#RegButtonCover ,#ProfileButtonCover{
     width: 30%;
     display: flex;
     justify-content: right;
@@ -42,18 +42,28 @@
         width: 90px;
         height: 38px;
         font-size: larger;
-        /* margin-right: .5rem; */
         cursor: pointer;
     }
 }
-#RegButtonCover button:nth-child(1){
+#RegButtonCover button:nth-child(1) ,#UserBtnCover button{
     background-color: transparent;
     transition: .2s;
     color: rgb(255, 0, 0);
     border: none;
     font-size: 22px;
 }
-#RegButtonCover button:nth-child(2){
+#UserBtnCover button{
+    border:1px solid red;
+    border-radius: 8px;
+    width: 60px;
+    margin-right: 1.4rem;    
+} 
+
+#UserBtnCover button:hover{
+        background-color: red;
+        color:white;
+}
+#RegButtonCover button:nth-child(2),#ProfileButtonCover button:nth-child(2){
     background-color: red;
     color: white;
     border-radius: 20px 0px 0px 20px;
@@ -65,7 +75,7 @@
 #RegButtonCover button:nth-child(1):hover{
     transform: scale(1.2);
 }
-#RegButtonCover button:nth-child(2):hover{
+#RegButtonCover button:nth-child(2):hover ,#ProfileButtonCover button:nth-child(2):hover{
     box-shadow: 2px 2px 15px red;
 }
 #LogoCover{
