@@ -6,6 +6,7 @@ import { CiUser } from "react-icons/ci";
 import rentalcontext from '../context/Rentalcontext';
 const Navbar = () => {
   const contextContent=useContext(rentalcontext);
+  const [showLogout,setShowLogout]=useState(false);
   const navigate=useNavigate();
   const handleHomeClick=()=>{
     navigate("/");
@@ -16,11 +17,16 @@ const Navbar = () => {
   const handleSignin=()=>{
     navigate("/Signin");
   }
+  const handleTogleUser=()=>{
+    if(showLogout)setShowLogout(false);
+    else setShowLogout(true);
+  }
   const handleLogout=async()=>{
     try{
       const res=await contextContent.account.deleteSession("current");
       console.log(res);
       contextContent.setNewUser(true);
+      setShowLogout(false);
       navigate('/login');
     }
     catch(e){
@@ -28,7 +34,9 @@ const Navbar = () => {
     }
   }
 
+  
   return (
+
     <div>
       <div id='Navbar'>
         <div>
@@ -45,13 +53,18 @@ const Navbar = () => {
         </ul>
         <div id="ProfileButtonCover" style={{display:(contextContent.newUser)?"none":"flex"}}>
           <div id="UserBtnCover">
-              <button onClick={handleLogout}><CiUser/></button>
+              <button onClick={handleTogleUser}><CiUser/></button>
           </div>
-          <button>Connect</button>
+          <button onClick={()=>{navigate('/addshop')}}>Connect</button>
         </div>
         <div id="RegButtonCover" style={{display:(!contextContent.newUser)?"none":"flex"}}>
             <button onClick={handleLogin}>Login</button>
             <button onClick={handleSignin}>Signin</button>
+        </div>
+        <div id="ProfileCover" style={{display:(showLogout)?"flex":"none"}}>
+          <p>Welcome {(!contextContent.newUser)?contextContent.sesionDetail.name:"user"}</p>
+          <div id="hLine"></div>
+          <p onClick={handleLogout}>Logout</p>
         </div>
       </div>
     </div>

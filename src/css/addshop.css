@@ -1,0 +1,153 @@
+#FormCover{
+    width: 90%;
+    left: 5%;
+    top: 15%;
+    /* background-color: rgb(78, 57, 57); */
+    /* height: 80%; */
+    padding-bottom: 4rem;
+    position: absolute;
+    color:white;
+    border: 1px solid white;
+    box-shadow: 2px 2px 20px white;
+    border-radius: 12px;
+    overflow: hidden;
+    h2{
+        text-align: center;
+    }
+    >button{
+        background-color: transparent;
+        color:white;
+        height: 35px;
+        margin-top: 2rem;
+        width: 150px;
+        float: right;
+        margin-right: 18%;
+        cursor: pointer;
+        border: 1px solid white;
+        border-radius: 8px;
+    }
+    >button:hover{
+        box-shadow: 1px 1px 10px white;
+        border-width: 2px;
+    }
+}
+#FirstSec{
+    display: flex;
+    justify-content: space-evenly;
+    height: 40%;
+    
+    padding: 2rem;
+    margin-top: 2rem;
+    >div:nth-child(1){
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly   ;
+        align-items: center;
+        width: 45%;
+        >h2{
+            margin-bottom: 1rem;
+        }
+        >div{
+            margin: .4rem;
+        }
+    }
+    >div:nth-child(2){
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: left;
+        >div{
+            margin: .4rem;
+        }
+        label{
+            font-size: larger;
+            margin-right: 8px;
+        }
+        input{
+            height: 28px;
+            border-radius: 8px;
+            width: 50%;
+            padding-left: 1rem;
+            font-size: medium;
+            background-color: transparent;
+            border: 2px solid rgb(255, 255, 255);
+            color: white;
+            overflow: auto;
+            
+        }
+    }
+}
+#FindLocation{
+    background-color: transparent;
+    height: 32px;
+    border:2px solid white;
+    cursor: pointer;
+    color: white;
+    padding: 4px;
+    border-radius: 8px;
+    margin-right: 1rem;
+    width: 15%;
+    font-size: small;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 2px 2px 8px white;
+    transition: .2s;
+}
+#FindLocation:hover{
+    scale: 1.1;
+}
+
+.submitBtn{
+    width:180px;
+    float: left;
+    height: 32px;
+    font-size: large;
+    cursor: pointer;
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.1);
+}
+.submitBtn:hover{
+    background-color: rgb(167, 167, 167);
+    color: white;
+}
+.inputImgCover{
+    display: flex;
+    align-items: center;
+
+}
+#SecondSec{
+    /* height: 50%; */
+    /* background-color: grey; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: left;
+    padding-left: 10%;
+    label{
+        font-size: larger;
+        margin-right: 1rem;
+        text-align: center;
+    }
+    input{
+        width: 80%;
+        height: 26px;
+        border-radius: 8px;
+        padding-left: 1rem;
+        font-size: medium;
+        border: 2px solid white;
+        color: white;
+        background-color: transparent;
+        padding-right: .2rem;
+    }
+    >div{
+        width: 80%;
+        display: flex;
+        justify-content:space-between;
+        margin: .4rem;
+    }
+}

@@ -7,6 +7,7 @@ import rentalcontext from "../context/Rentalcontext";
 const Home = () => {
   const contextContent=useContext(rentalcontext);
   const check=async()=>{
+    console.log(contextContent.sessionDetial);
     try{
       const acc=await contextContent.account.get();
       contextContent.setNewUser(false);
@@ -15,6 +16,7 @@ const Home = () => {
     }
     catch(e){
       contextContent.setNewUser(true);
+      console.log(e);
     }
   }
   useEffect(()=>{

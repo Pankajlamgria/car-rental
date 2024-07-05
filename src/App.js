@@ -5,6 +5,7 @@ import Login from "./component/Login.js";
 import "./App.css";
 import Signin from "./component/Signin.js";
 import Rentalstate from "./context/Rentalstate.js";
+import Addshop from "./component/Addshop.js";
 
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signin" element={<Signin/>}/>
+          <Route path="/addshop" element={<Addshop/>}/>
         </Routes>
       </Router>
     </Rentalstate>

@@ -14,7 +14,7 @@ const Signin = () => {
         const res=await contextContent.account.create("unique()",signinDetails.email,signinDetails.password,signinDetails.username);
         contextContent.setNewUser(false);
         console.log(res);
-        navigate('/');
+        navigate('/login');
     }
     catch(e){
       alert(e);

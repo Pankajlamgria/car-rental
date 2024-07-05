@@ -15,8 +15,10 @@ const Login = () => {
     e.preventDefault();
     try{
       const res=await contextContent.account.createEmailPasswordSession(loginDetails.email,loginDetails.password);
-      console.log(res);
-      contextContent.setNewUser(false);
+      
+      // const user=await contextContent.account.createJWT();
+      // contextContent.client.setJWT(user.jwt);
+      // console.log(user);
       navigate('/');
     }
     catch(e){
