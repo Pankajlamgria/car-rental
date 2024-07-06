@@ -7,6 +7,14 @@ const Addshop = () => {
   const contextContent = useContext(rentalcontext);
   const [img1Url, setImg1Url] = useState("");
   const [img2Url, setImg2Url] = useState("");
+  const [shopId, setShopId] = useState();
+  const [vehicle, setVehicle] = useState("");
+  const [vehicleImg1, setVehicleImg1] = useState("");
+  const [vehicleImg2, setVehicleImg2] = useState("");
+  const [bikeDetail,setBikeDetail]=useState({brandName:"",modelName:"",year:0,category:"",class:"",kms:0,cc:0,price:0})
+
+
+  const [toggleAddShop, setToggleAddShop] = useState(true);
   const [shopDetail, setShopDetail] = useState({
     shopName: "",
     ownerName: "",
@@ -17,14 +25,14 @@ const Addshop = () => {
   });
 
   const handleSubmitForm = async () => {
-    console.log(img1Url);
     try {
-      if (img2Url != "") {
+      if (img2Url !== "") {
         const result = await contextContent.database.createDocument(
           process.env.REACT_APP_DATABASE_ID,
           process.env.REACT_APP_SHOP_DETAIL_COLLECTION_ID,
           "unique()",
           {
+            id: `${contextContent.sesionDetail.$id}`,
             name: `${shopDetail.shopName}`,
             address: shopDetail.address,
             number: shopDetail.number,
@@ -43,6 +51,7 @@ const Addshop = () => {
           process.env.REACT_APP_SHOP_DETAIL_COLLECTION_ID,
           "unique()",
           {
+            id: `${contextContent.sesionDetail.$id}`,
             name: `${shopDetail.shopName}`,
             address: shopDetail.address,
             number: shopDetail.number,
@@ -53,13 +62,21 @@ const Addshop = () => {
           },
           []
         );
-        console.log(result);
+        contextContent.handleSuccessAlert("Shop Created Successfully...");
+        setShopId(result.$id);
+        setToggleAddShop(false);
       }
     } catch (e) {
-      alert(e);
+      if (img1Url === "") {
+        document.getElementById("UploadBtn1").style.borderColor = "red";
+        contextContent.handleFailureAlert("Image not  Uploaded.");
+      } else {
+        contextContent.handleFailureAlert(`${e}`);
+      }
     }
   };
   const handleUploadImg = async () => {
+    console.log("clicked");
     try {
       const res = await contextContent.storage.createFile(
         process.env.REACT_APP_BUCKET_ID,
@@ -69,9 +86,38 @@ const Addshop = () => {
       await setImg1Url(
         `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res.$id}/view?project=${process.env.REACT_APP_PROJECT_ID}`
       );
-      console.log(img1Url);
+      contextContent.handleSuccessAlert("Image Uploaded Successfully.");
+
+      document.getElementById("UploadBtn1").style.borderColor = "green";
     } catch (e) {
-      alert(e);
+      contextContent.handleFailureAlert("Image not  Uploaded Successfully.");
+      document.getElementById("UploadBtn1").style.borderColor = "red";
+    }
+  };
+  const handleBikeImgUpload = async (id) => {
+    try {
+      const res = await contextContent.storage.createFile(
+        process.env.REACT_APP_BUCKET_ID,
+        "unique()",
+        document.getElementById(id).files[0]
+      );
+      if (id === "BikeImg1") {
+        setVehicleImg1(
+          `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res.$id}/view?project=${process.env.REACT_APP_PROJECT_ID}`
+        );
+        document.getElementById("BikeUploadBtn1").style.borderColor = "green";
+      } else {
+        setVehicleImg2(
+          `https://cloud.appwrite.io/v1/storage/buckets/${process.env.REACT_APP_BUCKET_ID}/files/${res.$id}/view?project=${process.env.REACT_APP_PROJECT_ID}`
+        );
+        document.getElementById("BikeUploadBtn2").style.borderColor = "green";
+      }
+      contextContent.handleSuccessAlert("Image Uploaded Successfully.");
+    } catch (e) {
+      contextContent.handleFailureAlert("Image not  Uploaded Successfully.");
+      if (id === "BikeImg1")
+        document.getElementById("BikeUploadBtn1").style.borderColor = "red";
+      else document.getElementById("BikeUploadBtn2").style.borderColor = "red";
     }
   };
 
@@ -79,24 +125,78 @@ const Addshop = () => {
     setShopDetail({ ...shopDetail, [e.target.name]: e.target.value });
   };
   const handleFindMyLocation = async () => {
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(showPosition);
-    // } else {
-    //   alert("Geolocation is not supported by this browser.");
-    // }
     const promise = await contextContent.database.listDocuments(
-      "66863c7400085e5c0301",
-      "66863c97000e46f3283f",
-      [Query.equal("_createdBy", contextContent.sesionDetail.$id)]
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_SHOP_DETAIL_COLLECTION_ID,
+      [Query.equal("id", `${contextContent.sesionDetail.$id}`)]
     );
     console.log(promise);
   };
-  const showPosition = (position) => {
-    console.log(position.coords);
+
+  const handleUpdateRadio = (e) => {
+    setVehicle(e.target.value);
   };
+
+
+  const handleUpdateBikeDetails=(e)=>{
+    setBikeDetail({...bikeDetail,[e.target.name]:e.target.value});
+  }
+  const handleAddBike=async(e)=>{
+    try {
+      if (vehicleImg2 !== "") {
+        const result = await contextContent.database.createDocument(
+          process.env.REACT_APP_DATABASE_ID,
+          process.env.REACT_APP_BIKE_COLLECTION_ID,
+          "unique()",
+          {
+            shopId: `${shopId}`,
+            brandName: bikeDetail.brandName,
+            modelName: bikeDetail.modelName,
+            year: Number(bikeDetail.year),
+            kms: Number(bikeDetail.kms),
+            cc: Number(bikeDetail.cc),
+            price:Number(bikeDetail.price),
+            category: bikeDetail.category,
+            class: bikeDetail.class,
+            bikeImg1: new URL(vehicleImg1),
+            bikeImg2: new URL(vehicleImg2),
+          },
+          []
+        );
+        console.log(result);
+      } else {
+        const result = await contextContent.database.createDocument(
+          process.env.REACT_APP_DATABASE_ID,
+          process.env.REACT_APP_BIKE_COLLECTION_ID,
+          "unique()",
+          {
+            shopId: `${shopId}`,
+            brandName: bikeDetail.brandName,
+            modelName: bikeDetail.modelName,
+            year: Number(bikeDetail.year),
+            kms: Number(bikeDetail.kms),
+            cc: Number(bikeDetail.cc),
+            price:Number(bikeDetail.price),
+            category: bikeDetail.category,
+            class: bikeDetail.class,
+            bikeImg1: new URL(vehicleImg1),
+          },
+          []
+        );
+        contextContent.handleSuccessAlert("Bike Added Successfully...");
+      }
+    } catch (e) {
+      if (vehicleImg1 === "") {
+        document.getElementById("BikeUploadBtn1").style.borderColor = "red";
+        contextContent.handleFailureAlert("Image not  Uploaded.");
+      } else {
+        contextContent.handleFailureAlert(`${e}`);
+      }
+    }
+  }
   return (
     <div id="AddShopCover">
-      <div id="FormCover">
+      <div id="FormCover" style={{ display: toggleAddShop ? "block" : "none" }}>
         <h2>Add Shop</h2>
         <div id="FirstSec">
           <div>
@@ -106,6 +206,7 @@ const Addshop = () => {
               <input
                 className="submitBtn"
                 type="submit"
+                id="UploadBtn1"
                 onClick={handleUploadImg}
               />
             </div>
@@ -116,7 +217,7 @@ const Addshop = () => {
           </div>
           <div>
             <div>
-              <label>Shop Name:</label>
+              <label>Shop Name* </label>
               <input
                 type="text"
                 onChange={handleUpdateDetails}
@@ -125,7 +226,7 @@ const Addshop = () => {
               />
             </div>
             <div>
-              <label>Owner Name:</label>
+              <label>Owner Name* </label>
               <input
                 type="text"
                 onChange={handleUpdateDetails}
@@ -134,7 +235,7 @@ const Addshop = () => {
               />
             </div>
             <div>
-              <label>Established In</label>
+              <label>Established In* </label>
               <input
                 type="number"
                 onChange={handleUpdateDetails}
@@ -146,7 +247,7 @@ const Addshop = () => {
         </div>
         <div id="SecondSec">
           <div>
-            <label>Shop Address:</label>
+            <label>Shop Address* </label>
             <input
               type="text"
               name="address"
@@ -162,7 +263,7 @@ const Addshop = () => {
             <input value={"None"} disabled />
           </div>
           <div>
-            <label>Email:</label>
+            <label>Email* </label>
             <input
               type="email"
               onChange={handleUpdateDetails}
@@ -172,7 +273,7 @@ const Addshop = () => {
             />
           </div>
           <div>
-            <label>Contact Number:</label>
+            <label>Contact Number*</label>
             <input
               type="number"
               onChange={handleUpdateDetails}
@@ -184,7 +285,153 @@ const Addshop = () => {
         </div>
         <button onClick={handleSubmitForm}>Submit</button>
       </div>
-      <div></div>
+      <div
+        id="AddVehicle"
+        style={{ display: toggleAddShop ? "none" : "block" }}
+      >
+        <div>
+          <p>Select Vehicle:</p>
+          <label>
+            <input
+              onClick={handleUpdateRadio}
+              type="radio"
+              name="vehicle"
+              value="Car"
+            />
+            Car
+          </label>
+          <label>
+            <input
+              onClick={handleUpdateRadio}
+              type="radio"
+              name="vehicle"
+              value="Bike"
+            />
+            Bike
+          </label>
+        </div>
+        <div
+          id="CarForm"
+          style={{ display: vehicle === "Car" ? "block" : "none" }}
+        >
+          <h2>Car</h2>
+        </div>
+        <div
+          id="BikeForm"
+          style={{ display: vehicle === "Bike" ? "block" : "none" }}
+        >
+          <div className="vehicleImgSection">
+            <div>
+              <h2>Upload Bike Images</h2>
+              <div className="inputImgCover">
+                <input type="file" id="BikeImg1" name="filename" />
+                <input
+                  className="submitBtn"
+                  type="submit"
+                  id="BikeUploadBtn1"
+                  onClick={() => {
+                    handleBikeImgUpload("BikeImg1");
+                  }}
+                />
+              </div>
+              <div className="inputImgCover">
+                <input type="file" id="BikeImg2" name="filename" />
+                <input
+                  className="submitBtn"
+                  type="submit"
+                  id="BikeUploadBtn2"
+                  onClick={() => {
+                    handleBikeImgUpload("BikeImg2");
+                  }}
+                />
+              </div>
+            </div>
+            <div>
+              <div>
+                <label>Brand Name* </label>
+                <input
+                  type="text"
+                  name="brandName"
+                  placeholder="Honda,Tvs,Bajaj.."
+                  onChange={handleUpdateBikeDetails}
+                />
+              </div>
+              <div>
+                <label>Model Name* </label>
+                <input
+                  type="text"
+                  onChange={handleUpdateBikeDetails}
+                  name="modelName"
+                  placeholder="CBR,NTORQ,PULSAR ...."
+                />
+              </div>
+              <div>
+                <label>Year Model* </label>
+                <input
+                  type="number"
+                  onChange={handleUpdateBikeDetails}
+                  name="year"
+                  placeholder="2010"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="vehicleDetailSection">
+            <div>
+              <label>Category</label>
+              <input
+                type="text"
+                name="category"
+                onChange={handleUpdateBikeDetails}
+                placeholder="SuperBike , cafe racer, naked"
+              />
+            </div>
+            <div>
+              <label>Class* </label>
+              <input
+                type="text"
+                onChange={handleUpdateBikeDetails}
+                name="class"
+                placeholder="I/II/III"
+              />
+            </div>
+            <div>
+              <label>KM Riden*</label>
+              <input
+                type="number"
+                onChange={handleUpdateBikeDetails}
+                name="kms"
+                placeholder="23000"
+              />
+            </div>
+            <div>
+              <label>CC*</label>
+              <input
+                type="number"
+                onChange={handleUpdateBikeDetails}
+                name="cc"
+                placeholder="1000/650/150"
+              />
+            </div>
+            <div>
+              <label>Price/24hrs*</label>
+              <input
+                type="number"
+                onChange={handleUpdateBikeDetails}
+                name="price"
+                placeholder="500"
+              />
+            </div>
+            <button
+              className="submitBtn"
+              style={{ marginTop: "2rem" }}
+              onClick={handleAddBike}
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

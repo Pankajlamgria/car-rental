@@ -3,6 +3,7 @@ import "../css/navbar.css";
 import logo from "../media/logo.jpg";
 import { useNavigate } from 'react-router-dom';
 import { CiUser } from "react-icons/ci";
+import { MdOutlineCancel } from "react-icons/md";
 import rentalcontext from '../context/Rentalcontext';
 const Navbar = () => {
   const contextContent=useContext(rentalcontext);
@@ -66,6 +67,14 @@ const Navbar = () => {
           <div id="hLine"></div>
           <p onClick={handleLogout}>Logout</p>
         </div>
+      </div>
+      <div id="SuccessAlert">
+          <button id="CloseAlert" onClick={contextContent.closeSuccessAlert}><MdOutlineCancel/></button>
+          <p>{contextContent.successAlertText}</p>
+      </div>
+      <div id="FailureAlert">
+          <button id="CloseFailureAlert" onClick={contextContent.closeFailureAlert}><MdOutlineCancel/></button>
+          <p>{contextContent.failureAlertText}</p>
       </div>
     </div>
   )

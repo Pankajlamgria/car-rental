@@ -19,10 +19,11 @@ const Login = () => {
       // const user=await contextContent.account.createJWT();
       // contextContent.client.setJWT(user.jwt);
       // console.log(user);
+      contextContent.handleSuccessAlert("Login Completed..")
       navigate('/');
     }
     catch(e){
-      alert(e);
+      contextContent.handleFailureAlert("Email or Password incorrect");
     }
   }
 
