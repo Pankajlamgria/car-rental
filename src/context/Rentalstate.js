@@ -3,9 +3,17 @@ import rentalcontext from "./Rentalcontext";
 import { Account, Client, Databases, Locale, Storage } from "appwrite";
 const Rentalstate = (props) => {
   const [newUser, setNewUser] = useState(true);
-  const [sesionDetail, setSessionDetail] = useState();
+  const [toggleAddShop, setToggleAddShop] = useState(true);
+  const [owner, setOwner] = useState(true);
+  const [carList,setCarList]=useState([])
+  const [bikeList,setBikeList]=useState([])
+  const [searchResults,setSearchResults]=useState([])
+  
+  const [sesionDetail, setSessionDetail] = useState(null);
   const [successAlertText, setSuccessAlertText] = useState("success full alert");
   const [failureAlertText, setFailureAlertText] = useState("failure full alert");
+  const [shopId,setShopId]=useState("");
+  const [shopInfo,setShopInfo]=useState();
 
   const client = new Client();
   client
@@ -53,7 +61,21 @@ const Rentalstate = (props) => {
         closeSuccessAlert,
         closeFailureAlert,
         handleFailureAlert,
-        failureAlertText
+        failureAlertText,
+        shopId,
+        setShopId,
+        shopInfo,
+        setShopInfo,
+        owner,
+        setOwner,
+        carList,
+        setCarList,
+        bikeList,
+        setBikeList,
+        toggleAddShop,
+        setToggleAddShop,
+        searchResults,
+        setSearchResults
 
       }}
     >

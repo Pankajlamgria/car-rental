@@ -5,6 +5,7 @@
     color: white;
     z-index: 10;
     width: 100%;
+    /* background-color: rgb(59, 59, 59); */
     justify-content: space-around;
     ul{
         width: 50%;

@@ -6,6 +6,9 @@ import "./App.css";
 import Signin from "./component/Signin.js";
 import Rentalstate from "./context/Rentalstate.js";
 import Addshop from "./component/Addshop.js";
+import Usershop from "./component/Usershop.js";
+import Shop from "./component/Shop.js";
+import SearchResult from "./component/SearchResult.js";
 
 
 
@@ -20,6 +23,9 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/signin" element={<Signin/>}/>
           <Route path="/addshop" element={<Addshop/>}/>
+          <Route path="/myshop" element={<Usershop/>}/>
+          <Route path="/shop" element={<Shop/>}/>
+          <Route path="/serchresults" element={<SearchResult/>}/>
         </Routes>
       </Router>
     </Rentalstate>

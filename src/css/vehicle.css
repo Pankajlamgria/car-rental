@@ -1,0 +1,103 @@
+#VehicleCardCover{
+    height: 380px;
+    width: 260px;
+    border: 2px solid rgb(186, 186, 186);
+    box-shadow: 1px 1px 8px rgba(0,0,0,.1);
+    border-radius: 12px;
+    padding: .4rem;
+    margin-top:2rem;
+    position: relative;
+    transition: 2s;
+}
+#VehicleCardCover:hover{
+    #ReadVehicleBtn button{
+        bottom: -1rem;
+        opacity: 1;
+    }
+}
+#VehicleImgContainer{
+    height: 170px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    img{
+        width: 100%;
+        height: 100%;
+        transition: .2s;
+    }
+    img:hover{
+        transform: scale(1.2);
+    }
+}
+#VehicleCardContent{
+    width: 80%;
+    margin-left: 5%;
+    >h4{
+        font-family: 'Times New Roman', Times, serif;
+        font-size: large;
+        font-weight: bold;
+        margin-top: .4rem;
+    }
+    >p{
+        font-size: small;
+        font-weight: bold;
+        color:rgb(73, 73, 73);
+    }
+}
+.vechicleLine{
+    width: 110%;
+    height: 1.5px;
+    color: grey;
+    background-color:grey;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+#VechicleInfo{
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    color: rgb(121, 121, 121);
+    p{
+        font-size: small;
+        margin-top: .2rem;
+    }
+}
+#PriceSec{
+    display: flex;
+    justify-content: space-between;
+}
+#RupeeDiv{
+    display: flex;
+    h4{
+        font-size: large;
+    }
+}
+.ratedIcon{
+    color: rgb(255, 204, 0);
+}
+#ReadVehicleBtn{
+    display: flex;
+    justify-content: center;
+    margin-top: .4rem;
+    width: 110%;
+    button{
+        background-color: black;
+        color: white;
+        border-radius: 15px;
+        margin-top: .4rem;
+        height: 35px;
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding-left: .4rem;
+        padding-right: .4rem;
+        cursor: pointer;
+        position: absolute;
+        bottom: 8rem;
+        transition: .2s;
+        opacity: 0;
+    }
+}

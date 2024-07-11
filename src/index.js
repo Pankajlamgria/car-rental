@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "./App.css";
+// Bootstrap CSS
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 document.title="Rent";

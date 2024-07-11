@@ -1,0 +1,184 @@
+#MainShopSec {
+    width: 80%;
+    background-image: linear-gradient(to bottom left, rgb(149, 149, 149), black);
+    box-shadow: 2px 2px 4px rgba(194, 194, 194, 0.2);
+    min-height: 650px;
+    padding-right: .3rem;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 1%;
+}
+
+#ShopPageCover {
+    display: flex;
+    padding: 2% 3% 2% 3%;
+    /* justify-content: space-around; */
+    /* background-color: rgb(240, 240, 240); */
+
+}
+
+#OwnerSec {
+
+    border: 1px solid white;
+    height: 180px;
+    width: 30%;
+    border-radius: 8px;
+    padding-left: .8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        margin-left: 1rem;
+        font-size: medium;
+    }
+
+    :nth-child(2) {
+        color: rgb(72, 231, 72);
+    }
+
+    button {
+        width: 80%;
+        height: 18%;
+        background-color: transparent;
+        border: 2px solid green;
+        border-radius: 4px;
+        margin-left: 8%;
+        color: white;
+        cursor: pointer;
+    }
+
+    :hover {
+        background-image: linear-gradient(to top right, rgb(0, 0, 0), rgb(103, 103, 103));
+    }
+}
+
+#ShopHeading {
+    /* display: flex; */
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+
+    >div {
+        display: flex;
+        align-items: center;
+        width: 250px;
+        height: 50px;
+        justify-content: space-between;
+
+        >p {
+            font-size: larger;
+            font-weight: 700;
+        }
+    }
+}
+
+.hLine {
+    width: 95%;
+    height: 3px;
+    background-color: rgb(183, 183, 183);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    margin-left: 2.5%;
+}
+
+#DetailsSec {
+    display: flex;
+    justify-content: space-between;
+}
+
+#SecondDetailSec,
+#FirstDetailSec,
+#ThirdDetailSec {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 150px;
+    align-content: center;
+    margin-left: 10%;
+    margin-bottom: 2%;
+    justify-content: space-between;
+    font-size: larger;
+
+    p {
+        margin-top: .4rem;
+        display: flex;
+        align-items: center;
+        width: 50%;
+    }
+}
+
+#AddressBlock {
+    margin: 2% 8% 2% 10%;
+    font-size: large;
+
+    p {
+        display: flex;
+        align-items: center;
+        width: 70%;
+        justify-content: space-between;
+    }
+}
+
+#AddSec {
+    width: 80%;
+    margin-left: 8%;
+    margin-bottom: 1rem;
+
+    button {
+        height: 40px;
+        width: 150px;
+        background-color: rgb(226, 19, 19);
+        color: white;
+        border: 1px solid white;
+        border-radius: 15px;
+        font-size: large;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    button:hover {
+        box-shadow: 2px 2px 8px rgba(255, 255, 255);
+    }
+}
+
+#VechicleSec{
+    width: 82vw;
+    height: 460px;
+    margin-left:3%;
+    background-color: white;
+    border-radius: 8px;
+    border: 2px solid grey;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    justify-content: space-around;
+    padding-left: 5%;
+    padding-right: 5%;
+    align-items: center;
+    position: relative;
+}
+#ShowAllBtn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6rem;
+    button{
+        cursor: pointer;
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        height: 40px;
+        width: 120px;
+        border-radius: 12px;
+    }
+}

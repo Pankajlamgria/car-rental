@@ -1,20 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import rentalcontext from "../context/Rentalcontext";
 import "../css/addshop.css";
 import { IoLocationOutline } from "react-icons/io5";
 import { Query } from "appwrite";
+import Carform from "./Carform";
 const Addshop = () => {
   const contextContent = useContext(rentalcontext);
   const [img1Url, setImg1Url] = useState("");
   const [img2Url, setImg2Url] = useState("");
-  const [shopId, setShopId] = useState();
   const [vehicle, setVehicle] = useState("");
   const [vehicleImg1, setVehicleImg1] = useState("");
   const [vehicleImg2, setVehicleImg2] = useState("");
   const [bikeDetail,setBikeDetail]=useState({brandName:"",modelName:"",year:0,category:"",class:"",kms:0,cc:0,price:0})
 
 
-  const [toggleAddShop, setToggleAddShop] = useState(true);
+
+
+
+  // const [toggleAddShop, setToggleAddShop] = useState(true);
   const [shopDetail, setShopDetail] = useState({
     shopName: "",
     ownerName: "",
@@ -63,8 +66,8 @@ const Addshop = () => {
           []
         );
         contextContent.handleSuccessAlert("Shop Created Successfully...");
-        setShopId(result.$id);
-        setToggleAddShop(false);
+        contextContent.setShopId(result.$id);
+        contextContent.setToggleAddShop(false);
       }
     } catch (e) {
       if (img1Url === "") {
@@ -149,7 +152,7 @@ const Addshop = () => {
           process.env.REACT_APP_BIKE_COLLECTION_ID,
           "unique()",
           {
-            shopId: `${shopId}`,
+            shopId: `${contextContent.shopId}`,
             brandName: bikeDetail.brandName,
             modelName: bikeDetail.modelName,
             year: Number(bikeDetail.year),
@@ -170,7 +173,7 @@ const Addshop = () => {
           process.env.REACT_APP_BIKE_COLLECTION_ID,
           "unique()",
           {
-            shopId: `${shopId}`,
+            shopId: `${contextContent.shopId}`,
             brandName: bikeDetail.brandName,
             modelName: bikeDetail.modelName,
             year: Number(bikeDetail.year),
@@ -196,7 +199,7 @@ const Addshop = () => {
   }
   return (
     <div id="AddShopCover">
-      <div id="FormCover" style={{ display: toggleAddShop ? "block" : "none" }}>
+      <div id="FormCover" style={{ display: contextContent.toggleAddShop ? "block" : "none" }}>
         <h2>Add Shop</h2>
         <div id="FirstSec">
           <div>
@@ -278,8 +281,7 @@ const Addshop = () => {
               type="number"
               onChange={handleUpdateDetails}
               name="number"
-              plac
-              eholder="1234567890"
+              placeholder="1234567890"
             />
           </div>
         </div>
@@ -287,7 +289,7 @@ const Addshop = () => {
       </div>
       <div
         id="AddVehicle"
-        style={{ display: toggleAddShop ? "none" : "block" }}
+        style={{ display: contextContent.toggleAddShop ? "none" : "block" }}
       >
         <div>
           <p>Select Vehicle:</p>
@@ -314,7 +316,7 @@ const Addshop = () => {
           id="CarForm"
           style={{ display: vehicle === "Car" ? "block" : "none" }}
         >
-          <h2>Car</h2>
+          <Carform/>
         </div>
         <div
           id="BikeForm"
